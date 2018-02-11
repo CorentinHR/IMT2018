@@ -7,10 +7,9 @@
 
 namespace QuantLib {
 
-    class ConstantBlackScholesProcess : public StochasticProcess1D {
+	class constantBlackScholesProcess : public StochasticProcess1D {
 
-        // your implementation goes here
-    private:
+	private:
 		Handle<Quote> x0_;
 		Handle<YieldTermStructure> riskFreeRate_;
 		Handle<YieldTermStructure> 	dividendYield_;
@@ -20,7 +19,7 @@ namespace QuantLib {
 		Date exerciceDate_;
 	public:
 
-		constantBlackScholesModel(
+		constantBlackScholesProcess(
 			const Handle <Quote> x0,
 			const Date exerciceDate,
 			const Handle<YieldTermStructure>& riskFreeTS,
@@ -37,7 +36,8 @@ namespace QuantLib {
 			Time t0, Real x0, Time dt) const;
 
 		Real x0() const;
-    };
+	};
+
 
 }
 
