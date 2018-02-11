@@ -1,8 +1,10 @@
 #include "constantblackscholesprocess.hpp"
 
+
+
 namespace QuantLib {
-	
-	constantBlackScholesModel::constantBlackScholesModel(
+
+	constantBlackScholesProcess::constantBlackScholesProcess(
 		const Handle<Quote> x0,
 		const Date exerciceDate,
 		const Handle<YieldTermStructure>& riskFreeTS,
@@ -21,21 +23,26 @@ namespace QuantLib {
 
 
 
-	Real constantBlackScholesModel::drift(Time t, Real x) const {
+	Real constantBlackScholesProcess::drift(Time t, Real x) const {
 		return constDrift_*x;
 	}
 
-	Real constantBlackScholesModel::diffusion(Time t, Real x) const {
+	Real constantBlackScholesProcess::diffusion(Time t, Real x) const {
 		return constDiffusion_*x;
 	}
 
-	Real constantBlackScholesModel::variance(const StochasticProcess1D&,
+	Real constantBlackScholesProcess::variance(const StochasticProcess1D&,
 		Time t0, Real x0, Time dt) const {
 		return discretization_->variance(*this, t0, x0, dt);
 	}
 
-	Real constantBlackScholesModel::x0()const {
+	Real constantBlackScholesProcess::x0()const {
 		return x0_->value();
 	}
+
+
+
+
+
 
 }
