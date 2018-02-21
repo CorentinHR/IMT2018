@@ -110,7 +110,7 @@ int main() {
 
 		eurOption.setPricingEngine(
 			boost::shared_ptr<PricingEngine>(
-				new MCEuropeanEngine_2<PseudoRandom>(
+				new MCEuropeanEngine<PseudoRandom>(
 					bsmProcess,
 					10,
 					Null<Size>(),
@@ -119,7 +119,6 @@ int main() {
 					10000,
 					Null<Real>(),
 					Null<Size>(), SeedGenerator::instance().get(),
-					false
 					))
 		);
 		clock_t tStart = clock();
@@ -140,7 +139,8 @@ int main() {
 					10000,
 					Null<Real>(),
 					Null<Size>(), SeedGenerator::instance().get(),
-					true
+					true,
+					K
 					))
 		);
 		clock_t tStart2 = clock();
