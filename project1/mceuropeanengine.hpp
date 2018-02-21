@@ -64,11 +64,13 @@ namespace QuantLib {
 			Real requiredTolerance,
 			Size maxSamples,
 			BigNatural seed,
-			bool withConstParameters);
+			bool withConstParameters,
+			Real strike);
 	protected:
 		boost::shared_ptr<path_pricer_type> pathPricer() const;
 	private:
 		bool withConstParameters_;
+		Real strike_;
 	public:
 		boost::shared_ptr<path_generator_type> pathGenerator() const {
 			Size dimensions = process_->factors();
@@ -84,7 +86,7 @@ namespace QuantLib {
 					new path_generator_type(
 
 						boost::shared_ptr<constantBlackScholesProcess>(
-							new constantBlackScholesProcess(process->stateVariable(), this->arguments_.exercise->lastDate(), process->riskFreeRate(),
+							new constantBlackScholesProcess(process->stateVariable(), this->arguments_.exercise->lastDate(), strike_, process->riskFreeRate(),
 
 								process->blackVolatility(), process->dividendYield(), boost::shared_ptr<StochasticProcess1D::discretization>(new EulerDiscretization))),
 						grid,
@@ -155,7 +157,8 @@ namespace QuantLib {
 			Real requiredTolerance,
 			Size maxSamples,
 			BigNatural seed,
-			bool withConstParameters)
+			bool withConstParameters,
+			Real strike)
 		: MCVanillaEngine<SingleVariate, RNG, S>(process,
 			timeSteps,
 			timeStepsPerYear,
@@ -167,6 +170,7 @@ namespace QuantLib {
 			maxSamples,
 			seed) {
 		withConstParameters_ = withConstParameters;
+		strike_ = strike;
 	}
 
 
