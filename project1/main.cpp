@@ -139,8 +139,7 @@ int main() {
 					10000,
 					Null<Real>(),
 					Null<Size>(), SeedGenerator::instance().get(),
-					true,
-					K
+					true
 					))
 		);
 		clock_t tStart2 = clock();
