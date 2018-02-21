@@ -7,6 +7,7 @@ namespace QuantLib {
 	constantBlackScholesProcess::constantBlackScholesProcess(
 		const Handle<Quote> x0,
 		const Date exerciceDate,
+		const Real strike,
 		const Handle<YieldTermStructure>& riskFreeTS,
 		const Handle<BlackVolTermStructure>& blackVolTS,
 		const Handle<YieldTermStructure>& dividendYieldTS,
@@ -17,7 +18,7 @@ namespace QuantLib {
 		constDrift_ = riskFreeRate_->zeroRate(exerciceDate_, riskFreeRate_->dayCounter(), Continuous,
 			NoFrequency, true) - dividendYield_->zeroRate(exerciceDate_, riskFreeRate_->dayCounter(), Continuous,
 				NoFrequency, true);
-		constDiffusion_ = blackVolatility_->blackVol(exerciceDate_, x0->value());
+		constDiffusion_ = blackVolatility_->blackVol(exerciceDate_, strike_);
 
 	}
 
