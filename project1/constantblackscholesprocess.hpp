@@ -17,11 +17,13 @@ namespace QuantLib {
 		Real constDrift_;
 		Real constDiffusion_;
 		Date exerciceDate_;
+		Real strike_;
 	public:
 
 		constantBlackScholesProcess(
 			const Handle <Quote> x0,
 			const Date exerciceDate,
+			const Real strike,
 			const Handle<YieldTermStructure>& riskFreeTS,
 			const Handle<BlackVolTermStructure>& blackVolTS,
 			const Handle<YieldTermStructure>& dividendYieldTS,
