@@ -7,6 +7,12 @@ using namespace QuantLib;
 int main() {
 
 	try {
+		// Random number
+		int nombre_aleatoire = 0;
+		srand(time(NULL)); // initialisation de rand
+		nombre_aleatoire = rand();
+		std::cout << nombre_aleatoire << std::endl;
+
 		// Specify (1) calendar for specific market
 		//         (2) date count convention
 		//         (3) current date
@@ -110,7 +116,7 @@ int main() {
 
 		eurOption.setPricingEngine(
 			boost::shared_ptr<PricingEngine>(
-				new MCEuropeanEngine<PseudoRandom>(
+				new MCEuropeanEngine_2<PseudoRandom>(
 					bsmProcess,
 					10,
 					Null<Size>(),
@@ -119,6 +125,8 @@ int main() {
 					10000,
 					Null<Real>(),
 					Null<Size>(), SeedGenerator::instance().get(),
+					false
+					//nombre_aleatoire
 					))
 		);
 		clock_t tStart = clock();
@@ -139,6 +147,7 @@ int main() {
 					10000,
 					Null<Real>(),
 					Null<Size>(), SeedGenerator::instance().get(),
+					//nombre_aleatoire,
 					true
 					))
 		);
