@@ -12,14 +12,13 @@ namespace QuantLib {
 		const Handle<BlackVolTermStructure>& blackVolTS,
 		const Handle<YieldTermStructure>& dividendYieldTS,
 		boost::shared_ptr<discretization>& disc)
-		:StochasticProcess1D(disc), x0_(x0),
+		:StochasticProcess1D(disc), x0_(x0), strike_(strike),
 		riskFreeRate_(riskFreeTS), dividendYield_(dividendYieldTS), blackVolatility_(blackVolTS) {
 		exerciceDate_ = exerciceDate;
 		constDrift_ = riskFreeRate_->zeroRate(exerciceDate_, riskFreeRate_->dayCounter(), Continuous,
 			NoFrequency, true) - dividendYield_->zeroRate(exerciceDate_, riskFreeRate_->dayCounter(), Continuous,
 				NoFrequency, true);
-		constDiffusion_ = blackVolatility_->blackVol(exerciceDate_, strike_);
-
+		constDiffusion_ = blackVolatility_->blackVol(exerciceDate_,strike_);
 	}
 
 
@@ -40,10 +39,5 @@ namespace QuantLib {
 	Real constantBlackScholesProcess::x0()const {
 		return x0_->value();
 	}
-
-
-
-
-
 
 }
